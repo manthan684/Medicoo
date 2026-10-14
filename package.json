@@ -1,0 +1,15 @@
+{
+  "name": "medicoo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "Start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
