@@ -6,7 +6,33 @@ const { dateRange } = require("../utils/daterange");
 // small helper: "2027-03-31T00:00:00Z" becomes "2027-03-31"
 const dayOf = (date) => new Date(date).toISOString().slice(0, 10);
 
+// ---------- double-click protection ----------
+// A stock-in that is exactly the same as one saved (or still being saved)
+// in the last few seconds is treated as an accidental double click and refused.
+// This works on the server, so it also protects you if the browser sends twice.
+const RECENT_MS = 10 * 1000; // 10 seconds
+const recent = new Map(); // fingerprint -> time it started saving
+
+// one short text that describes a stock-in: the supplier and every row
+const fingerprintOf = (supplierName, items) => {
+  const rows = items
+    .map((i) => `${i.medicine}|${i.batchNumber}|${i.quantity}|${dayOf(i.expiryDate)}`)
+    .sort()
+    .join(";");
+  return `${String(supplierName || "").trim().toLowerCase()}#${rows}`;
+};
+
+// forget the ones that are older than 10 seconds
+const forgetOld = () => {
+  const now = Date.now();
+  for (const [key, time] of recent) {
+    if (now - time > RECENT_MS) recent.delete(key);
+  }
+};
+
 exports.createStockIn = async (req, res) => {
+  let fingerprint = null;
+
   try {
     const { supplierName, items } = req.body;
 
@@ -67,6 +93,19 @@ exports.createStockIn = async (req, res) => {
       cleanItems.push({ medicine: item.medicine, batchNumber, quantity, expiryDate });
     }
 
+    // STEP 1b: refuse an accidental double click.
+    // There is no "await" between the check and the save of the fingerprint,
+    // so two clicks that arrive at the same moment cannot both get through.
+    forgetOld();
+    fingerprint = fingerprintOf(supplierName, cleanItems);
+    if (recent.has(fingerprint)) {
+      fingerprint = null; // this request did not claim it, so it must not release it
+      return res.status(409).json({
+        message: "This stock-in was just saved. Check the History list before saving again.",
+      });
+    }
+    recent.set(fingerprint, Date.now());
+
     // STEP 2: everything is fine, now save
     const savedItems = [];
     for (const item of cleanItems) {
@@ -84,6 +123,8 @@ exports.createStockIn = async (req, res) => {
     const stockIn = await StockIn.create({ supplierName, items: savedItems });
     res.status(201).json(stockIn);
   } catch (err) {
+    // the save failed, so let the person try again straight away
+    if (fingerprint) recent.delete(fingerprint);
     res.status(400).json({ message: err.message });
   }
 };
