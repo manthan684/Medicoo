@@ -116,14 +116,13 @@ export default function Welcome() {
   const done = count >= TOTAL;
 
   return (
-    <>
+    <div className="flex min-h-screen items-center justify-center bg-[#f3eefa] p-3 sm:p-6">
       <style>{CSS}</style>
 
-      {/* the whole page: two panels, edge to edge */}
-      <div className="grid min-h-screen w-full bg-white lg:grid-cols-[5fr_7fr]">
+      <div className="grid w-full max-w-[1240px] overflow-hidden rounded-[28px] bg-white shadow-[0_30px_80px_-30px_rgba(90,20,110,0.35)] lg:min-h-[min(760px,calc(100vh_-_3rem))] lg:grid-cols-[5fr_7fr]">
         {/* ---------- Left: brand panel ---------- */}
         <section
-          className="hidden flex-col justify-between px-10 py-10 text-white lg:flex xl:px-14"
+          className="hidden flex-col justify-between px-10 py-9 text-white lg:flex xl:px-12"
           style={{
             background:
               "linear-gradient(175deg, #8a0a8a 0%, #5c0a78 42%, #430a62 100%)",
@@ -203,11 +202,11 @@ export default function Welcome() {
 
         {/* ---------- Right: the welcome ---------- */}
         <section
-          className={`flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-16 xl:px-24 ${
+          className={`flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-[70px] ${
             done ? "wl-go" : ""
           }`}
         >
-          <div className="mx-auto w-full max-w-[570px]">
+          <div className="w-full max-w-[570px]">
             {/* logo, shown only on small screens (the left panel is hidden there) */}
             <div className="mb-10 flex items-center gap-2.5 lg:hidden">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7b0a86] text-white">
@@ -231,7 +230,11 @@ export default function Welcome() {
               className="mt-5 text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-[#3b0a4d] sm:text-[3.5rem]"
             >
               <Typed full={LINES[0]} typed={typedA} showCursor={onFirstLine} />
-              <Typed full={LINES[1]} typed={typedB} showCursor={!onFirstLine} />
+              <Typed
+                full={LINES[1]}
+                typed={typedB}
+                showCursor={!onFirstLine && !done}
+              />
             </div>
 
             <p
@@ -292,6 +295,122 @@ export default function Welcome() {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

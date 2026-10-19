@@ -1,9 +1,10 @@
+import { API_URL } from "../api";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { expiryStatus } from "../utils/expiry";
 
-const API = "http://localhost:5000/api/batches";
+const API = `${API_URL}/api/batches`;
 const EVERY = 10000; // look for new notifications every 10 seconds
 const LOW_LIMIT = 100; // "low stock" means fewer than this many units
 

@@ -133,7 +133,7 @@ exports.getSupplies = async (req, res) => {
 
     const supplies = await Supply.find(filter)
       .sort({ supplyDate: -1 })
-      .limit(200)
+      (200)
       .populate("shop", "name ownerName")
       .populate("items.medicine", "name type strengthValue strengthUnit");
 

@@ -1,8 +1,9 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const BASE = "http://localhost:5000/api";
+const BASE = `${API_URL}/api`;
 
 const money = (n) => `Rs ${Number(n || 0).toLocaleString("en-IN")}`;
 const label = (m) =>

@@ -1,9 +1,10 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ExpiryBadge from "../components/ExpiryBadge";
 import { expiryStatus } from "../utils/expiry";
 
-const API = "http://localhost:5000/api/batches";
+const API = `${API_URL}/api/batches`;
 
 const label = (m) =>
   `${m.name}${m.strengthValue != null ? ` ${m.strengthValue} ${m.strengthUnit || ""}` : ""}`;

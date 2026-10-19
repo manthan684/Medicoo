@@ -1,7 +1,8 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/medicines";
+const API = `${API_URL}/api/medicines`;
 
 const TYPES = ["tablet", "capsule", "syrup", "injection", "ointment", "drops", "other"];
 const UNITS = ["mg", "g", "mcg", "ml", "IU", "%"];

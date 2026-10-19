@@ -1,8 +1,9 @@
+import { API_URL } from "../api";
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const AuthContext = createContext(null);
-const API = "http://localhost:5000/api/auth";
+const API = `${API_URL}/api/auth`;
 
 // put the token on every request, or take it off
 const setHeader = (token) => {

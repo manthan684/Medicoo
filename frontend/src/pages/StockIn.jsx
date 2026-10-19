@@ -1,8 +1,9 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ExpiryBadge from "../components/ExpiryBadge";
-const API = "http://localhost:5000/api/stockin";
-const MEDICINES_API = "http://localhost:5000/api/medicines";
+const API = `${API_URL}/api/stockin`;
+const MEDICINES_API = `${API_URL}/api/medicines`;
 
 const emptyRow = { medicine: "", batchNumber: "", expiryDate: "", quantity: "" };
 

@@ -1,7 +1,8 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BASE = "http://localhost:5000/api";
+const BASE = `${API_URL}/api`;
 const emptyRow = { medicine: "", quantity: "" };
 
 const label = (m) =>

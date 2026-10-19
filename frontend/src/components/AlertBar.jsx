@@ -1,8 +1,9 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/alerts/summary";
+const API = `${API_URL}/api/alerts/summary`;
 const EVERY = 10000; // check every 10 seconds
 
 // small line icons for the alert cards

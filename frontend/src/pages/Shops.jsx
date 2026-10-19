@@ -1,7 +1,8 @@
+import { API_URL } from "../api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/shops";
+const API = `${API_URL}/api/shops`;
 const emptyForm = { name: "", ownerName: "", phone: "", address: "" };
 
 export default function Shops() {
